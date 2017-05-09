@@ -21,7 +21,7 @@ body{
 .header{
   display: block;
   width: 100%;
-  background-color: #0099cc;
+  background-color: #92cb5e;
   height: 70px;
 }
 
@@ -98,11 +98,34 @@ nav .nav-item-default{
 
 .form-title{
   position: relative;
-  background-color: #0099cc;
+  background-color: #92cb5e;
   color: white;
   height: 100px;
   line-height: 100px;
-  margin-bottom: 50px;
+  /*margin-bottom: 20px;*/
+}
+
+.error-valor{
+  text-align: left;
+  color: white;
+}
+
+.login-contenido{
+  margin-top: 50px;
+}
+
+.login-errores{
+  background-color: #ee827a;
+  border-radius: 5px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.register-errores{
+  background-color: #ee827a;
+  border-radius: 5px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
 }
 
 #password , #name,#apellido,#user-name,#password2,#mail{
@@ -127,7 +150,7 @@ nav .nav-item-default{
   width: 150px;
   margin: 0;
   display: block;
-  background-color: #0099cc;
+  background-color: #92cb5e;
   border: none;
   text-align: center;
 	font-family: inherit;
@@ -147,7 +170,7 @@ input:focus{
 }
 
 #submit:hover{
-  background-color: #007399;
+  background-color: #6d934a;
 }
 
 .submit-container{
@@ -175,10 +198,26 @@ input:focus{
   color: black;
 }
 
+.register-errores{
+  background-color: #ee827a;
+  border-radius: 5px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.register-contenido{
+  margin-top: 50px;
+}
+
+.foto-label{
+  display: inline-block;
+}
+
 .register-submit-container{
     position: relative;
     left: 115px;
     margin-bottom: 30px;
+    margin-top: 25px;
 }
 
 #register-name , #register-apellido,#register-password,#register-password2{
@@ -220,7 +259,7 @@ input:focus{
   width: 300px;
   margin: 0;
   display: block;
-  background-color: #0099cc;
+  background-color: #92cb5e;
   border: none;
   text-align: center;
 	font-family: inherit;
@@ -236,12 +275,12 @@ input:focus{
 }
 
 #register-submit:hover{
-  background-color: #007399;
+  background-color: #6d934a;
 }
 
 .main-footer{
   overflow: hidden;
-  background-color: #0099cc;
+  background-color: #92cb5e;
   width: 100%;
   height: 100px;
   border-top-left-radius: 20px;

@@ -1,33 +1,71 @@
 <?php
 
 //validaciones
-function validarRegistro (){
+function validarRegistro($datos){
 
 	$errors = [];
 
 	//validar nombre
-	$nombre = trim($_POST['nombre']);
-	if ($nombre == "") {
-		$errors[] = "Te faltó ingresar tu nombre";
+	$nombre = trim($datos['nombre']);
+	$largoNombre = strlen($nombre);
+	if ($nombre == "" || $largoNombre < 3 || $largoNombre > 15 ) {
+		$errors[] = "El nombre ingresado no es valido";
+		$_SESSION["nombre"] = "";
+	}
+	else{
+		$_SESSION["nombre"] = $nombre;
+	}
+
+	//validar apellido
+	$apellido = trim($datos['apellido']);
+	$largoApellido = strlen($apellido);
+	if ($apellido == "" || $largoApellido < 3 || $largoApellido > 15) {
+		$errors[] = "El apellido ingresado no es valido";
+		$_SESSION["apellido"] = "";
+	}
+	else{
+		$_SESSION["apellido"] = $apellido;
+	}
+
+	//validar usuario
+	$usuario = trim($datos["usuario"]);
+	$largoUsuario = strlen($usuario);
+	if($usuario == "" || $largoUsuario < 3){
+		$errors[] = "El usuario ingresado no es valido";
+		$_SESSION["usuario"] = "";
+	}
+	else{
+		$_SESSION["usuario"] = $usuario;
 	}
 
 	//validar email
-	$email = trim($_POST['email']);
-	if ($email == "") {
+	$mail = trim($datos['mail']);
+	if ($mail == "") {
 		$errors[] = "Te faltó ingresar tu email";
-	} elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+		$_SESSION["mail"] = "";
+	} elseif (!filter_var($mail, FILTER_VALIDATE_EMAIL)) {
 		$errors[] = "El email ingresado no es válido";
+		$_SESSION["mail"] = "";
 	}
-
-	//validar edad
-	$edad = trim($_POST['edad']);
-	if (!is_numeric($edad)) {
-		$errors[] = "La edad tiene que ser un número";
+	else{
+		$_SESSION["mail"] = $mail;
 	}
 
 	//validar pass
-	if ($_POST['password'] != $_POST['password2']) {
+	$password = trim($datos["password"]);
+	$password2 = trim($datos["password2"]);
+
+	if($password == "" || $password2 == ""){
+		$errors[] = "No se completo alguna de las contraseñas";
+	}
+	elseif($password != $password2){
 		$errors[] = "Las contraseñas no coinciden";
+	}
+
+	//validar imagen
+	if($validar = validarImagenRegistro('foto-perfil')){
+		$errors[] = $validar;
+
 	}
 
 	//devuelvo los errores
@@ -47,17 +85,23 @@ function getUsers (){
 	return $users;
 }
 
-function guardarUsuario(){
+function guardarUsuario($datos){
 	//users es un array de arrays usuarios
 	$users = getUsers();
 
+	//subo la imagen
+
+	guardarImagenRegistro('foto-perfil', "../images/");
+
 	//newUser es un array del tipo usuario
 	$newUser = [
-		'nombre' => $_POST['nombre'],
-		'email' => $_POST['email'],
-		'edad' => $_POST['edad'],
-		'password' => password_hash($_POST['password'], PASSWORD_DEFAULT)
+		'nombre' => $datos['nombre'],
+		'apellido' => $datos["apellido"],
+		'usuario' => $datos["usuario"],
+		'mail' => $datos['mail'],
+		'password' => password_hash($datos['password'], PASSWORD_DEFAULT)
 	];
+
 
 	//guardo newUser dentro del array de usuarios
 	$users[] = $newUser;
@@ -69,24 +113,52 @@ function guardarUsuario(){
 	file_put_contents('../usuarios.json', $users);
 }
 
-function guardarImagen($upload, $path) {
-	$errores = [];
-	if ($_FILES[$upload]["error"] == UPLOAD_ERR_OK) {
+function validarLogin($datos,$users){
+	$usuario = $datos["usuario"];
+	$password = $datos["password"];
+	if($datos["remember"]){
+		setcookie("usuario",$usuario,time()+(60*60*24),'/');
+	}
+	else{
+		setcookie("usuario",$usuario,time() - 3600,'/');
+		unset($_COOKIE["usuario"]);
+	}
+
+	foreach ($users as $key => $campos){
+			if($campos["usuario"] == $usuario && password_verify($password, $campos["password"])){
+				$_SESSION["usuario"] = $campos["usuario"];
+				return true;
+			}
+	}
+	$_SESSION["usuario"] = $usuario;
+	$_SESSION["log-errores"] = "El usuario o contraseña es incorrecto";
+	return false;
+}
+
+function validarImagenRegistro($upload) {
+	$nombre = $_FILES[$upload]["name"];
+	$ext = pathinfo($nombre, PATHINFO_EXTENSION);
+
+	if($_FILES[$upload]["error"] != UPLOAD_ERR_NO_FILE){
+			if (!$_FILES[$upload]["error"] == UPLOAD_ERR_OK) {
+				$error = "No se pudo subir la foto";
+			}
+			elseif ($ext != "png" && $ext != "jpg") {
+					$error = "No acepto la extension del archivo";
+			}
+			else{
+				$error = "";
+			}
+			return $error;
+	}
+}
+
+function guardarImagenRegistro($upload, $path) {
 
 		$nombre = $_FILES[$upload]["name"];
     $ext = pathinfo($nombre, PATHINFO_EXTENSION);
     $archivo = $_FILES[$upload]["tmp_name"];
 
-		if ($ext != "png" && $ext != "jpg") {
-			$errores[] = "No acepto la extension";
-		}
-    else {
-      $nombre = uniqid();
-			move_uploaded_file($archivo,$path.$_POST["name"].$nombre. "." . $ext);
-		}
-	}
-  else {
-		$errores[] = "No pude subir la foto";
-	}
-	return $errores;
+    $nombre = uniqid();
+		move_uploaded_file($archivo,$path.$_POST["usuario"].$nombre. "." . $ext);
 }
