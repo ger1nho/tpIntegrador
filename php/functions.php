@@ -65,7 +65,6 @@ function validarRegistro($datos){
 	//validar imagen
 	if($validar = validarImagenRegistro('foto-perfil')){
 		$errors[] = $validar;
-
 	}
 
 	//devuelvo los errores
@@ -76,6 +75,7 @@ function validarRegistro($datos){
 
 //abm usuario
 function getUsers (){
+
 	$users = @file_get_contents('../usuarios.json');
 	if (!$users) {
 		$users = [];
@@ -90,7 +90,6 @@ function guardarUsuario($datos){
 	$users = getUsers();
 
 	//subo la imagen
-
 	guardarImagenRegistro('foto-perfil', "../images/");
 
 	//newUser es un array del tipo usuario
@@ -102,18 +101,16 @@ function guardarUsuario($datos){
 		'password' => password_hash($datos['password'], PASSWORD_DEFAULT)
 	];
 
-
 	//guardo newUser dentro del array de usuarios
 	$users[] = $newUser;
-
 	//lo codifico a json
 	$users = json_encode($users);
-
 	//guardarlo en el archivo json
 	file_put_contents('../usuarios.json', $users);
 }
 
 function validarLogin($datos,$users){
+
 	$usuario = $datos["usuario"];
 	$password = $datos["password"];
 	if($datos["remember"]){
@@ -124,7 +121,7 @@ function validarLogin($datos,$users){
 		unset($_COOKIE["usuario"]);
 	}
 
-	foreach ($users as $key => $campos){
+	foreach ($users as $campos){
 			if($campos["usuario"] == $usuario && password_verify($password, $campos["password"])){
 				$_SESSION["usuario"] = $campos["usuario"];
 				return true;
@@ -135,7 +132,8 @@ function validarLogin($datos,$users){
 	return false;
 }
 
-function validarImagenRegistro($upload) {
+function validarImagenRegistro($upload){
+
 	$nombre = $_FILES[$upload]["name"];
 	$ext = pathinfo($nombre, PATHINFO_EXTENSION);
 
