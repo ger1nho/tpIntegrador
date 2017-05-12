@@ -9,7 +9,7 @@
   $_SESSION["mail"] = !isset($_SESSION["mail"]) ? "" : $_SESSION["mail"];
   $_SESSION["iniciada"] = !isset($_SESSION["iniciada"]) ? false : $_SESSION["iniciada"];
 
-  
+
   if(!$_SESSION["iniciada"]){
 ?>
 
@@ -26,13 +26,7 @@
   <body>
     <div class="container">
       <header class="header">
-          <img src="" alt="">
-          <nav class="navigation">
-              <ul class="nav-list">
-                <a class="link" href="login.php"><li class="nav-item">Login</li></a>
-                <a class="link" href="index.php"><li class="nav-item">Inicio</li></a>
-              </ul>
-          </nav>
+          <a href="index.php"><img src="images/logo.png" alt="imagen logo" class="logo-imagen"></a>
       </header>
 
       <main class="main">
@@ -63,8 +57,6 @@
               </form>
           </div>
       </main>
-      <?php include("footer.html"); ?>
-
     </div>
   </body>
 </html>

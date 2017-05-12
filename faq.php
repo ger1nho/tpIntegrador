@@ -10,7 +10,7 @@
   </head>
   <body class="body-index">
       <div class="container">
-        <?php include("header.html"); ?>
+        <?php include("includes/header.html"); ?>
         <main class="main">
           <div class="title-container">
             <h1 class="faq">Preguntas frecuentes</h1>
@@ -35,7 +35,7 @@
           </div>
 
         </main>
-        <?php include("footer.html"); ?>
+        <?php include("includes/footer.html"); ?>
       </div>
   </body>
 </html>

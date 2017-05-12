@@ -19,11 +19,10 @@
   <body>
       <div class="container">
         <header class="header">
-            <img src="" alt="">
+            <a href="index.php"><img src="images/logo.png" alt="imagen logo" class="logo-imagen"></a>
             <nav class="navigation">
                 <ul class="nav-list">
                   <a class="link" href="register.php"><li class="nav-item nav-item-register">No tenes una cuenta? Registrate</li></a>
-                  <a class="link" href="index.php"><li class="nav-item">Inicio</li></a>
                 </ul>
             </nav>
         </header>
@@ -54,8 +53,6 @@
                 </form>
             </div>
         </main>
-
-          <?php include("footer.html"); ?>
       </div>
   </body>
 </html>
