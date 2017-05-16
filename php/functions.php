@@ -1,7 +1,7 @@
 <?php
 
 //validaciones
-function validarRegistro($datos){
+function validarRegistro($datos,$users){
 
 	$errors = [];
 
@@ -39,12 +39,25 @@ function validarRegistro($datos){
 	}
 
 	//validar email
+
+
+
 	$mail = trim($datos['mail']);
+	$valido = true;
+	foreach ($users as $campos){
+			if($campos["mail"] == $mail){
+				$valido = false;
+			}
+	}
 	if ($mail == "") {
 		$errors[] = "Te faltó ingresar tu email";
 		$_SESSION["mail"] = "";
 	} elseif (!filter_var($mail, FILTER_VALIDATE_EMAIL)) {
 		$errors[] = "El email ingresado no es válido";
+		$_SESSION["mail"] = "";
+	}
+	elseif(!$valido){
+		$errors[] = "El mail ya existe";
 		$_SESSION["mail"] = "";
 	}
 	else{
@@ -85,9 +98,8 @@ function getUsers (){
 	return $users;
 }
 
-function guardarUsuario($datos){
+function guardarUsuario($datos,$users){
 	//users es un array de arrays usuarios
-	$users = getUsers();
 
 	//subo la imagen
 	guardarImagenRegistro('foto-perfil', "../images/");

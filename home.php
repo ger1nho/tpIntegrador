@@ -17,18 +17,20 @@
 
     <body>
       <header class="header">
-          <img src="" alt="">
+          <a href="index.php"><img src="images/logo.png" alt="logo" class="logo-imagen"></a>
           <nav class="navigation">
               <ul class="nav-list">
-                <a class="link" href="php/logout.php"><li class="nav-item">Cerrar sesion</li></a>
+                <a class="link" href="php/logout.php"><li class="nav-item-default">Cerrar sesion</li></a>
               </ul>
           </nav>
       </header>
 
       <div class="container">
         <h1>Bienvenido <?php echo $_SESSION["usuario"]; ?></h1>
+      </div>
+        <?php include("includes/footer.html"); ?>
     </body>
-    <?php include("footer.html"); ?>
+
 </html>
 
 <?php

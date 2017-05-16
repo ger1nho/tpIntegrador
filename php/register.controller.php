@@ -3,12 +3,12 @@
   include("functions.php");
 
   if($_POST){
-
-    $errors = validarRegistro($_POST);
+    $users = getUsers();
+    $errors = validarRegistro($_POST,$users);
     // var_dump($errors);exit;
 
     if(!$errors){
-      guardarUsuario($_POST);
+      guardarUsuario($_POST,$users);
       $_SESSION["iniciada"] = true;
       header("Location: ../home.php");
     }
