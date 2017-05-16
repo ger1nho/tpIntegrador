@@ -3,14 +3,15 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="/css/normalize.css">
+    <script src="https://use.fontawesome.com/57be1b068d.js"></script>
     <title>Index</title>
   </head>
   <body class="body-index">
+    <?php include("includes/header.html"); ?>
       <div class="container">
-        <?php include("includes/header.html"); ?>
         <main class="main">
           <div class="title-container">
             <h1 class="faq">Preguntas frecuentes</h1>
@@ -35,7 +36,7 @@
           </div>
 
         </main>
-        <?php include("includes/footer.html"); ?>
       </div>
+      <?php include("includes/footer.html"); ?>
   </body>
 </html>

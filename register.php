@@ -24,11 +24,10 @@
     <title>Register</title>
   </head>
   <body>
+    <header class="header">
+        <a href="index.php"><img src="images/logo.png" alt="imagen logo" class="logo-imagen"></a>
+    </header>
     <div class="container">
-      <header class="header">
-          <a href="index.php"><img src="images/logo.png" alt="imagen logo" class="logo-imagen"></a>
-      </header>
-
       <main class="main">
           <div class="form-container">
               <form class="form-login" action="php/register.controller.php" method="post" enctype="multipart/form-data">

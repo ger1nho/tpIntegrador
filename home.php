@@ -11,24 +11,24 @@
         <link rel="stylesheet" href="css/styles.css">
         <link rel="stylesheet" href="/css/normalize.css">
         <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+        <script src="https://use.fontawesome.com/57be1b068d.js"></script>
         <title>Home</title>
     </head>
 
     <body>
+      <header class="header">
+          <img src="" alt="">
+          <nav class="navigation">
+              <ul class="nav-list">
+                <a class="link" href="php/logout.php"><li class="nav-item">Cerrar sesion</li></a>
+              </ul>
+          </nav>
+      </header>
 
       <div class="container">
-        <header class="header">
-            <img src="" alt="">
-            <nav class="navigation">
-                <ul class="nav-list">
-                  <a class="link" href="php/logout.php"><li class="nav-item">Cerrar sesion</li></a>
-                </ul>
-            </nav>
-        </header>
         <h1>Bienvenido <?php echo $_SESSION["usuario"]; ?></h1>
-
-        <?php include("footer.html"); ?>
     </body>
+    <?php include("footer.html"); ?>
 </html>
 
 <?php

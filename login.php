@@ -17,16 +17,15 @@
     <title>Login</title>
   </head>
   <body>
+      <header class="header">
+          <a href="index.php"><img src="images/logo.png" alt="imagen logo" class="logo-imagen"></a>
+          <nav class="navigation">
+              <ul class="nav-list">
+                <a class="link" href="register.php"><li class="nav-item nav-item-register">No tenes una cuenta? Registrate</li></a>
+              </ul>
+          </nav>
+      </header>
       <div class="container">
-        <header class="header">
-            <a href="index.php"><img src="images/logo.png" alt="imagen logo" class="logo-imagen"></a>
-            <nav class="navigation">
-                <ul class="nav-list">
-                  <a class="link" href="register.php"><li class="nav-item nav-item-register">No tenes una cuenta? Registrate</li></a>
-                </ul>
-            </nav>
-        </header>
-
         <main class="main">
             <div class="form-container">
                 <form class="form-login" action="php/login.controller.php" method="post">

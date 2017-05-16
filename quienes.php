@@ -6,11 +6,12 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/normalize.css">
+    <script src="https://use.fontawesome.com/57be1b068d.js"></script>
     <title>Index</title>
   </head>
   <body class="body-index">
+      <?php include("includes/header.html"); ?>
       <div class="container">
-        <?php include("includes/header.html"); ?>
         <main class="main">
 
           <section class="nosotros">
@@ -23,7 +24,7 @@
             </div>
           </section>
         </main>
-        <?php include("includes/footer.html"); ?>
       </div>
+      <?php include("includes/footer.html"); ?>
   </body>
 </html>
